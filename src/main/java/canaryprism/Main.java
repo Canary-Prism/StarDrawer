@@ -17,7 +17,7 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
 public class Main {
 
-    public static String version = "1.0.0";
+    public static String version = "1.1.0";
 
     static volatile int sides = 5;
 
@@ -29,7 +29,8 @@ public class Main {
 
         class StarDrawer extends JComponent {
 
-            static final Dimension min_size = new Dimension(700, 700);
+            static final Dimension min_size = new Dimension(100, 100);
+            static final Dimension pref_size = new Dimension(400, 400);
 
 
             @Override
@@ -112,8 +113,12 @@ public class Main {
             }
 
             @Override
-            public Dimension getPreferredSize() {
+            public Dimension getMinimumSize() {
                 return min_size;
+            }
+            @Override
+            public Dimension getPreferredSize() {
+                return pref_size;
             }
         }
 
@@ -173,13 +178,14 @@ public class Main {
         info_panel.add(author_label, BorderLayout.LINE_END);
 
         bottom_panel.add(info_panel);
+        bottom_panel.setMinimumSize(bottom_panel.getPreferredSize());
 
 
         frame.getContentPane().add(bottom_panel, BorderLayout.PAGE_END);
 
 
+        frame.setMinimumSize(frame.getContentPane().getMinimumSize());
         frame.pack();
-        frame.setMinimumSize(frame.getPreferredSize());
         frame.setVisible(true);
     }
 }
