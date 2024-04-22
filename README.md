@@ -24,5 +24,5 @@ This program uses Java 22 with preview features bc i'm weird like that
 
 ## Historical Changelog
 
-### 1.0
+### 1.0.0
 - made the thing
