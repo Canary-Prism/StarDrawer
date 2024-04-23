@@ -2,6 +2,7 @@ package canaryprism.stardrawer;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.Optional;
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
@@ -22,10 +23,45 @@ public class Main {
 
     static volatile int sides = 5;
 
+    static Optional<String> getArg(String[] args, String option) {
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equals("--" + option)) {
+                if (i + 1 < args.length) {
+                    return Optional.of(args[i + 1]);
+                } else {
+                    throw new IllegalArgumentException("Option --" + option + " requires an argument after");
+                }
+            }
+        }
+        return Optional.empty();
+    }
+
     public static void main(String[] args) {
         FlatMacDarkLaf.setup();
 
+        final Integer posx = getArg(args, "posx").map(Integer::parseInt).orElse(null);
+        final Integer posy = getArg(args, "posy").map(Integer::parseInt).orElse(null);
+        final Integer width = getArg(args, "width").map(Integer::parseInt).orElse(null);
+        final Integer height = getArg(args, "height").map(Integer::parseInt).orElse(null);
+        sides = getArg(args, "sides").map(Integer::parseInt).orElse(5);
 
+        if (posx != null ^ posy != null) {
+            throw new IllegalArgumentException("Both posx and posy must be provided");
+        }
+        if (width != null ^ height != null) {
+            throw new IllegalArgumentException("Both width and height must be provided");
+        }
+
+        if (posx != null && posy != null) {
+            if (posx < 0 || posy < 0) {
+                throw new IllegalArgumentException("positions must be positive integers");
+            }
+        }
+        if (width != null && height != null) {
+            if (width < 100 || height < 100) {
+                throw new IllegalArgumentException("width and height must be at least 100");
+            }
+        }
         
 
         var frame = new JFrame("Star Drawer");
@@ -189,8 +225,21 @@ public class Main {
         frame.getContentPane().add(bottom_panel, BorderLayout.PAGE_END);
 
 
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            var pos = frame.getLocation();
+            var dim = frame.getSize();
+            System.out.println(pos.getX() + " " + pos.getY() + " " + dim.getWidth() + " " + dim.getHeight() + " " + sides);
+        }));
+
+
         frame.setMinimumSize(frame.getContentPane().getMinimumSize());
         frame.pack();
+        if (posx != null && posy != null) {
+            frame.setLocation(posx, posy);
+        }
+        if (width != null && height != null) {
+            frame.setSize(width, height);
+        }
         frame.setVisible(true);
     }
 }
