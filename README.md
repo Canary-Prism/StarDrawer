@@ -24,6 +24,10 @@ This program uses Java 22 with preview features bc i'm weird like that
 
 ## Historical Changelog
 
+### 2.0.0
+- package structure change
+- added launcher support
+
 ### 1.1.1
 - added padding around the info panel
 
