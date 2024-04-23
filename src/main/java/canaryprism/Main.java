@@ -18,7 +18,7 @@ import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
 public class Main {
 
-    public static String version = "1.1.0";
+    public static String version = "1.1.1";
 
     static volatile int sides = 5;
 
