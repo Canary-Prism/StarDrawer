@@ -24,6 +24,9 @@ This program uses Java 22 with preview features bc i'm weird like that
 
 ## Historical Changelog
 
+### 2.0.1
+- slider now shows up with the correct initial value if an initial value is set
+
 ### 2.0.0
 - package structure change
 - added launcher support
