@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
@@ -171,11 +172,12 @@ public class Main {
 
         var info_panel = new JPanel(new BorderLayout());
 
-        var version_label = new JLabel(" Star Drawer ver: " + version);
-        var author_label = new JLabel("by Canary Prism ");
+        var version_label = new JLabel("Star Drawer ver: " + version);
+        var author_label = new JLabel("by Canary Prism");
 
         info_panel.add(version_label, BorderLayout.LINE_START);
         info_panel.add(author_label, BorderLayout.LINE_END);
+        info_panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
         bottom_panel.add(info_panel);
         bottom_panel.setMinimumSize(bottom_panel.getPreferredSize());
