@@ -177,7 +177,7 @@ public class Main {
         var sides_panel = new JPanel();
         sides_panel.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        var slider = new JSlider(0, 100, 5);
+        var slider = new JSlider(0, 100, sides);
         var label = new JLabel(STR."Sides: \{sides}");
         slider.addChangeListener((e) -> {
             sides = slider.getValue();
