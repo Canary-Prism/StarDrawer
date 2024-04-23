@@ -228,7 +228,7 @@ public class Main {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             var pos = frame.getLocation();
             var dim = frame.getSize();
-            System.out.println(pos.getX() + " " + pos.getY() + " " + dim.getWidth() + " " + dim.getHeight() + " " + sides);
+            System.out.println((int) pos.getX() + " " + (int) pos.getY() + " " + (int) dim.getWidth() + " " + (int) dim.getHeight() + " " + sides);
         }));
 
 
